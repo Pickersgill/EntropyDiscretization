@@ -9,9 +9,9 @@ Give the source dataset (MUST BE A LINE SEPORATED LIST OF INTEGERS) as argument 
 python3 run.py dataset/my_data_set
 ```
 
-Recommended to use dataset/gen\_nums.py to repopulate the dataset if you wish to do so.
+Recommended to use ```dataset/gen_nums.py``` to repopulate the dataset if you wish to do so. Change the level of entropy beyond which the algorithm will stop
+attempting to split bins using the CUTOFF variable in ```binner/binner.py```.
 
-binner document contains body of algorithm for entropy discretization.
 
 # Example Output
 For the (roughly) uniformally random dataset below...
