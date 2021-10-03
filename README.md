@@ -1,33 +1,40 @@
 # EntropyDiscretization
-Discretization of data set based on maximizing entropy.
+Discretization of data set based on minimizing entropy.
 
 # Usage
 
-Give the source dataset (MUST BE A LINE SEPORATED LIST OF INTEGERS) as argument to run.py:
+Give the source dataset in plaintext format where each row (line) is a comma seperated list of the attributes.
+It is assumed that the final entry on each line is the label. E.g:
 
+```rubiks_cube 4 4 2```
+
+This row shows a data object with attributes (rubiks_cub, 4, 4) and label 2.
+
+If you want to change or re-generate the source data it may be helpful to use:
+```dataset/gen_nums.py```
+
+Run the program with:
 ```
 python3 run.py dataset/my_data_set
 ```
 
-Recommended to use ```dataset/gen_nums.py``` to repopulate the dataset if you wish to do so. Change the level of entropy beyond which the algorithm will stop
-attempting to split bins using the CUTOFF variable in ```binner/binner.py```.
+After running the program will show 2 graphs, one showing total entropy for the dataset and another showing
+the "normalized" entropy, total entropy divided by number of bins.
+
+Change the BIN_AMOUNT constant in ```binner/binner.py``` to determine how many bins will be created.
+
+# Observations
+
+- Setting BIN_AMOUNT equal to the number of data objects will always result in total entropy 0 as each bin
+    will be entirely pure containing only 1 item.
+
+- Total entropy tends to increase until approaching n/2 bins (where n is number of data objects) and 
+    approaching 0.
+
+- Normalized entropy tends to decrease after each iteration (which I imagine is the desired effect).
 
 
-# Example Output
-For the (roughly) uniformally random dataset below...
 
-```
-[5, 5, 3, 10, 10, 1, 1, 4, 8, 8, 4, 2, 10, 3, 7, 8, 4, 6, 3, 7, 1, 1, 4, 4, 5, 7, 1, 10, 1, 10, 5, 9, 9, 4,
-3, 8, 7, 9, 1, 1, 8, 3, 5, 6, 5, 8, 3, 5, 3, 10, 5, 2, 7, 1, 9, 7, 6, 5, 10, 9, 5, 3, 8, 3, 2, 4, 10, 5, 5,
-1, 5, 7, 5, 4, 3, 5, 2, 4, 4, 4, 7, 3, 2, 1, 9, 3, 10, 2, 3, 4, 10, 10, 7, 6, 4, 6, 3, 5, 1, 6, 9, 3, 4, 5,
-8, 3, 6, 6, 4, 5, 3, 10, 2, 3, 7, 5, 4, 6, 5, 6, 10, 3, 6, 4, 9, 4, 7, 2, 9, 4, 6, 5, 3, 1, 1, 9, 10, 10, 8, 
-2, 6, 10, 10, 4, 4, 8, 7, 5, 4, 9, 6, 9, 1, 6, 6, 10, 6, 3, 2, 4, 7, 10, 8, 3, 6, 6, 4, 3, 4, 3, 8, 2, 9, 2, 
-10, 2, 10, 10, 3, 10, 9, 8, 2, 6, 7, 8, 4, 2, 8, 4, 9, 9, 6, 5, 8, 7, 2, 6, 5, 9]
-```
-We get the following program output:
 
-```
-Created 47 bins
-Here is the binned dataset...
-['5', '5', '3', '10', '10'] | ['1', '1', '4', '8', '8', '4', '2'] | ['10', '3', '7'] | ['8', '4', '6', '3'] | ['7', '1', '1', '4', '4', '5', '7'] | ['1', '10', '1', '10'] | ['5', '9', '9', '4', '3'] | ['8', '7', '9', '1', '1', '8'] | ['3', '5', '6', '5', '8', '3', '5', '3'] | ['10', '5'] | ['2', '7', '1'] | ['9', '7', '6'] | ['5', '10', '9', '5'] | ['3', '8', '3', '2'] | ['4', '10'] | ['5', '5', '1', '5', '7', '5', '4', '3', '5'] | ['2', '4', '4', '4'] | ['7'] | ['3', '2', '1', '9'] | ['3', '10', '2', '3'] | ['4', '10', '10', '7'] | ['6', '4', '6', '3'] | ['5', '1', '6', '9'] | ['3', '4', '5', '8', '3'] | ['6', '6', '4', '5', '3'] | ['10', '2', '3', '7'] | ['5', '4', '6', '5'] | ['6', '10', '3', '6'] | ['4', '9', '4', '7', '2', '9', '4'] | ['6', '5', '3'] | ['1', '1', '9'] | ['10', '10', '8', '2', '6', '10', '10'] | ['4', '4', '8'] | ['7', '5', '4'] | ['9', '6', '9', '1'] | ['6', '6', '10', '6'] | ['3', '2'] | ['4', '7', '10'] | ['8', '3', '6', '6', '4', '3', '4', '3', '8'] | ['2', '9', '2', '10', '2', '10', '10', '3', '10'] | ['9', '8'] | ['2', '6', '7'] | ['8', '4', '2', '8', '4'] | ['9', '9'] | ['6', '5', '8'] | ['7', '2', '6'] | ['5', '9'] | 
-```
+
+
